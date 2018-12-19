@@ -1,0 +1,2 @@
+module EventGiftsHelper
+end

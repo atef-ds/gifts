@@ -1,0 +1,37 @@
+<%= form_with(model: event_gift, local: true) do |form| %>
+  <% if event_gift.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event_gift.errors.count, "error") %> prohibited this event_gift from being saved:</h2>
+      <ul>
+      <% event_gift.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+  <h3>Participants</h3>
+  <table id="participants">
+     <tbody>
+      <%= form.fields_for :participants do |participant| %>
+        <%= render 'participant_fields', f: participant %>
+      <% end %>
+      <div class="links">
+      <%= link_to_add_association 'add participant', form, :participants, { class: 'btn btn-primary' } %>
+      </div>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
